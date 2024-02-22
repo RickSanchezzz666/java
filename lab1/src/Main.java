@@ -10,7 +10,7 @@ public class Main {
         System.out.println("Average Members num: " + conf.getAverageMembersNum());
         Meeting most = conf.getMostMembersMeeting();
         System.out.println("Most members in meeting: " + most.topic + " with " + most.membersNum + " members.");
-        Meeting meet = conf.getMeeting(1);
+        Meeting meet = conf.getMeeting(1).get();
         System.out.println("Length of name: '" + meet.topic + "' is " + conf.getNameLength(meet) + " symbols.");
     }
 }

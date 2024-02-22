@@ -1,45 +1,45 @@
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Conference {
     public Conference(String name, String place) {
-        __conferenceName = name;
-        __conferencePlace = name;
+        conferenceName = name;
+        conferencePlace = name;
     }
-    private String __conferenceName;
-    private String __conferencePlace;
-    private ArrayList<Meeting> __meetings = new ArrayList<>();
+    private String conferenceName;
+    private String conferencePlace;
+    private ArrayList<Meeting> meetings = new ArrayList<>();
 
     void outputData() {
-        System.out.println("Conference name: " + __conferenceName);
-        System.out.println("Conference place: " + __conferencePlace);
-        for (Meeting elem : __meetings) {
+        System.out.println("Conference name: " + conferenceName);
+        System.out.println("Conference place: " + conferencePlace);
+        for (Meeting elem : meetings) {
             System.out.println("Meeting topic: " + elem.topic + ". Members number: " + elem.membersNum + ". Meeting Date: " + elem.date);
         }
     }
 
-    Meeting getMeeting(int meetNum) {
-        if (meetNum > __meetings.size() || meetNum < 0) {
+    Optional<Meeting> getMeeting(int meetNum) {
+        if (meetNum > meetings.size() || meetNum < 0) {
             System.out.println("Wrong number!");
-            return null;
+            return Optional.empty();
         } else {
-            return __meetings.get(meetNum);
+            return Optional.ofNullable(meetings.get(meetNum));
         }
 
     }
 
     int getAverageMembersNum() {
         int count = 0;
-        for (Meeting elem : __meetings) {
+        for (Meeting elem : meetings) {
             count += elem.membersNum;
         }
-        return count / __meetings.size();
+        return count / meetings.size();
     }
 
     Meeting getMostMembersMeeting() {
         Meeting most = new Meeting();
         int count = 0;
-        for (Meeting elem : __meetings) {
+        for (Meeting elem : meetings) {
             if(elem.membersNum > count) {
                 count = elem.membersNum;
                 most = elem;
@@ -49,12 +49,12 @@ public class Conference {
     }
 
     int getNameLength(Meeting meet) {
-        return meet.topic.length();
+        return conferenceName.length();
     }
 
     void createMeeting(String topic, int members) {
         Meeting meet = new Meeting(topic, members);
-        __meetings.add(meet);
+        meetings.add(meet);
     }
 
 }
